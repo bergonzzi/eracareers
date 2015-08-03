@@ -1,7 +1,4 @@
-<snippet>
-  <content><![CDATA[
-# ${1:Project Name}
-
+## Eracareers
 This project is a lightweight alternative version of [eracareers.pt](http://www.eracareers.pt), or more specifically the ["research opportunity" search section](http://www.eracareers.pt/Search/index.aspx?task=search). A friend of mine was frustrated with it and asked if I could do something about it. So I did.
 
 The original [eracareers.pt](http://www.eracareers.pt) is "co-funded by the European Commission and maintained by the Portuguese Foundation for Science and Technology". Although it's supposed to be replaced with a better version as [mentioned here](http://www.euraxess.pt), it seems to be taking a while.
@@ -11,14 +8,14 @@ The project consists of 3 main components:
 * A search engine to search all the data - [Elasticsearch](https://www.elastic.co/)
 * A frontend to present all the data - [Python](https://www.python.org/) + [Flask](http://flask.pocoo.org/)
 
+Note: this is still work in progress!
+
 ## Installation
 
 * Clone this repo
 * Install Scrapy 1.0 - check their [excellent documentation](http://scrapy.readthedocs.org/en/latest/) to see how
 * Install Elasticsearch - [download here](https://www.elastic.co/downloads/elasticsearch)
 * Install Flask and pyes - use `pip install flask` and `pip install pyes`
-
-Note: this is still work in progress!
 
 ## Usage
 
@@ -60,6 +57,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
