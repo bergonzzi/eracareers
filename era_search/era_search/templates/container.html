@@ -1,0 +1,154 @@
+{% if results %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div id="sidebar" class="col s12 m4 l3">
+            <ul class="collapsible" data-collapsible="expandable">
+                <li>
+                    <div class="collapsible-header active">Cidade</div>
+                    <div class="collapsible-body">
+                        <ul class="nav refinements">
+                            {% for bucket in results.aggregations.city.buckets %}
+                            <li>
+                            <label class="checkbox">
+                                <input type="checkbox" id="city-{{bucket.key}}">
+                                <label for="city-{{bucket.key}}">{{bucket.key}} ({{bucket.doc_count}})</label>
+                            </label>
+                            </li>
+                           {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header active">Tipo de contrato</div>
+                    <div class="collapsible-body">
+                        <ul class="nav refinements">
+                            {% for bucket in results.aggregations.contract.buckets %}
+                            <li>
+                            <label class="checkbox">
+                                <input type="checkbox" id="contract-{{bucket.key}}">
+                                <label for="contract-{{bucket.key}}">{{bucket.key}} ({{bucket.doc_count}})</label>
+                            </label>
+                            </li>
+                           {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header active">Número de vagas</div>
+                    <div class="collapsible-body">
+                        <ul class="nav refinements">
+                            {% for bucket in results.aggregations.vacancies.buckets %}
+                            <li>
+                            <label class="checkbox">
+                                <input type="checkbox" id="vacancies-{{bucket.key}}">
+                                <label for="vacancies-{{bucket.key}}">{{bucket.key}} ({{bucket.doc_count}})</label>
+                            </label>
+                            </li>
+                           {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header active">Área genérica</div>
+                    <div class="collapsible-body">
+                        <ul class="nav refinements">
+                            {% for bucket in results.aggregations.main_field.buckets %}
+                            <li>
+                            <label class="checkbox">
+                                <input type="checkbox" id="main_field-{{bucket.key}}">
+                                <label for="main_field-{{bucket.key}}">{{bucket.key}} ({{bucket.doc_count}})</label>
+                            </label>
+                            </li>
+                           {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header active">Área específica</div>
+                    <div class="collapsible-body">
+                        <ul class="nav refinements">
+                            {% for bucket in results.aggregations.sub_field.buckets %}
+                            <li>
+                            <label class="checkbox">
+                                <input type="checkbox" id="sub_field-{{bucket.key}}">
+                                <label for="sub_field-{{bucket.key}}">{{bucket.key}} ({{bucket.doc_count}})</label>
+                            </label>
+                            </li>
+                           {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+    <div class="col s12 m8 l9 lighten-2">
+        <form name="input" action="/search" method="get">
+            <div class="row">
+                <div class="col s6">
+                    <br>
+                        <div class="input-field">
+                            <i class="material-icons prefix">search</i>
+                            <input id="term" name="term" type="text">
+                            <label for="term">Pesquisar por palavra-chave</label>
+                        </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                    <br>
+                        <button class="btn waves-effect waves-light grey lighten-1" type="submit">Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    <div id="container" class="row">
+        <p>{{ results.hits.total }} resultado(s)</p>
+        <table>
+            <tbody>
+                {% for doc in results.hits.hits %}
+                <tr>
+                    <td>
+                        <a class="waves-effect waves-light modal-trigger" href="#modal-{{doc._source.id}}">{{doc._source.job}}</a>
+                        <br>
+                        <span class="external-link">{{doc._source.institute}}</span>
+                        <br>
+                        {{doc._source.city}} - {{doc._source.main_field}}, {{doc._source.vacancies}} vaga(s)
+
+                        <div id="modal-{{doc._source.id}}" class="modal modal-fixed-footer">
+                            <div class="modal-content">
+                                <h4>{{doc._source.job}}</h4>
+                                <hr>
+                                <ul class="search-detail">
+                                    <li><strong>Referência: </strong>{{doc._source.ref}}</li>
+                                    <hr>
+                                    <li><strong>Cidade: </strong>{{doc._source.city}}</li>
+                                    <li><strong>Instituição de contacto: </strong>{{doc._source.institute}}</li>
+                                    <li><strong>Instituição de acolhimento: </strong>{{doc._source.org_name}}</li>
+                                    <li><strong>E-mail: </strong><a href="mailto:{{doc._source.email}}">{{doc._source.email}}</a></li>
+                                    <li><strong>Website: </strong><a href="{{doc._source.website}}" target="_blank">{{doc._source.website}}</a></li>
+                                    <hr>
+                                    <li><strong>Área científica genérica: </strong>{{doc._source.main_field}}</li>
+                                    <li><strong>Área científica específica: </strong>{{doc._source.sub_field}}</li>
+                                    <hr>
+                                    <li><strong>Número de vagas: </strong>{{doc._source.vacancies}}</li>
+                                    <li><strong>Tipo de contrato: </strong>{{doc._source.contract}}</li>
+                                    <li><strong>Data limite de candidatura: </strong>{{doc._source.deadline}}</li>
+                                    <hr>
+                                    {{doc._source.summary}}
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-blue btn-flat">Fechar</a>
+                                <a href="{{doc._source.url}}" target="_blank" class="waves-effect waves-blue btn-flat">Ver anúncio no eracareers.pt</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endif %}
+

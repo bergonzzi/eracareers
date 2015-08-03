@@ -1,0 +1,91 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+
+[type="checkbox"]+label:before {
+    border: 1px solid silver;
+}
+
+label {
+    color: #888;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+td {
+    padding: 10px 5px;
+}
+
+.search-result a:link {
+    color: #1a0dab;
+    text-decoration: none;
+}
+
+.search-result a:visited {
+    color: #609;
+}
+
+.search-result a:hover {
+    color: #1a0dab;
+    text-decoration: underline;
+}
+
+.search-result a:active {
+    color: #1a0dab;
+}
+
+.external-link {
+    color: #006621;
+}
+
+.external-link a:link, .external-link a:visited, .external-link a:hover, .external-link a:active {
+    color: #006621;
+    text-decoration: none;
+}
+
+.search-detail li {
+    margin: 5px;
+    color: #333333;
+}
+
+.refinements {
+    padding: 10px 0px 10px 20px;
+}
+
+/* label color */
+.input-field label {
+ color: #bababa;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+ color: #42A5F5;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+ border-bottom: 1px solid #42A5F5;
+ box-shadow: 0 1px 0 0 #42A5F5;
+}
+/* valid color */
+.input-field input[type=text].valid {
+ border-bottom: 1px solid #42A5F5;
+ box-shadow: 0 1px 0 0 #42A5F5;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+ border-bottom: 1px solid #f30000;
+ box-shadow: 0 1px 0 0 #f30000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+ color: #42A5F5;
+}
