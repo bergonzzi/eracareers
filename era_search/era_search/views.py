@@ -3,13 +3,13 @@
 
 from flask import render_template
 from flask import request
-from era_search import era_search
+from . import era_search
 from elasticsearch import Elasticsearch
 
 
 # TODO: Configuration
 host = "http://localhost:9200"
-indexName = "eracareers"
+index_name = "eracareers"
 aggregation_fields = ["city", "vacancies", "contract", "main_field", "sub_field"]
 
 es = Elasticsearch(host)
@@ -44,7 +44,7 @@ def perform_query(term, filter_string, page):
     term = term.encode('utf-8')
     query = get_basic_query(filters, term, page)
 
-    result = es.search(index=indexName, body=query)
+    result = es.search(index=index_name, body=query)
 
     return result
 
@@ -66,7 +66,8 @@ def get_basic_query(filters, term, page):
 
     if not page:
         page = 0
-    start = int(page) * 12
+
+    start = int(page) * 12  # Number of results per page
 
     must_clauses = []
 
@@ -82,7 +83,7 @@ def get_basic_query(filters, term, page):
     aggregations = {}
 
     for el in aggregation_fields:
-        aggregations[el] = {"terms" : {"field" : el }}
+        aggregations[el] = {"terms": {"field": el}}
 
     print aggregations
 

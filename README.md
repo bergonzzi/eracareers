@@ -16,12 +16,13 @@ Note: this is still work in progress!
 * Install Scrapy 1.0 - check their [excellent documentation](http://scrapy.readthedocs.org/en/latest/) to see how
 * Install Elasticsearch - [download here](https://www.elastic.co/downloads/elasticsearch)
 * Install Flask and pyes - use `pip install flask` and `pip install pyes`
+* Provide a file with proxies named `proxies.txt` in `era_scraper/eracareers/middlewares` (or disable the 2 proxy middlewares in `era_scraper/eracareers/settings.py` if you don't have one)
 
 ## Usage
 
 * Start up your elasticsearch instance
-* Run the scraper to get the latest data - in `era_scraper` do `scrapy crawl era`
-* Start up the app - in `era_search` do `python run.py`
+* Run the scraper to get the latest data - in the folder `era_scraper` do `scrapy crawl era`
+* Start up the app - in the folder `era_search` do `python run.py`
 
 This is enough to get it up and running locally (it's using Flask's development server). For a more robust installation you should probably run the app behind a webserver like nginx.
 
