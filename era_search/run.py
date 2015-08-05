@@ -1,5 +1,3 @@
-#!flask/bin/python
+from era_search.app import era_search
 
-from era_search import era_search
-
-era_search.run(debug=True)
+era_search.run(host='0.0.0.0', debug=True)

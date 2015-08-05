@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from flask import render_template
-from flask import request
-from . import era_search
+from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
 
+era_search = Flask(__name__)
 
 # TODO: Configuration
 host = "http://localhost:9200"
@@ -84,8 +83,6 @@ def get_basic_query(filters, term, page):
 
     for el in aggregation_fields:
         aggregations[el] = {"terms": {"field": el}}
-
-    print aggregations
 
     if term and filters:
         query = {
