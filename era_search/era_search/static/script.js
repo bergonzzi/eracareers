@@ -9,7 +9,6 @@ $(document).ready(function() {
 });
 
 
-
 function getFiltersFromDom(){
 	var filters = [];
 
@@ -26,7 +25,6 @@ function getFiltersFromDom(){
 };
 
 
-
 function getFilters() {
 	var checkbox = this;
 	var term = getURLParameter('term');
@@ -35,8 +33,9 @@ function getFilters() {
 	var filters = getFiltersFromDom();
 
 	if (checkbox.checked == true){
-		filters.push(id);
+		// filters.push(id);
 		var url = '/search?term='+term+'&filter='+filters;
+
 		$.get(url, function (response) {
 			document.open();
 			document.write(response);
@@ -55,12 +54,12 @@ function getFilters() {
 };
 
 
-
 function toggleAllFilters(filters) {
-	for (i = 0; i < filters.length; i++){
-		var filter = filters[i];
-		document.getElementById(filter).checked = true;
-	}
+    for (i = 0; i < filters.length; i++){
+        var filter = filters[i];
+        console.log(filter);
+        // document.getElementById(filter).checked = true;
+    }
 };
 
 
